@@ -22,7 +22,7 @@ const consoleFormat = winston.format.combine(
       ? JSON.stringify(metadata)
       : "";
 
-    return `${timestamp} [${level}] ${metaStr} ${message}`;
+    return `${timestamp} [${level}] ${message} ${metaStr}`;
   }),
 );
 

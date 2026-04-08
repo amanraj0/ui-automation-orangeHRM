@@ -38,21 +38,22 @@ setup("authenticate", async ({ page }) => {
           logger.info("Existing session is valid, skipping login");
           return;
         }
-        logger.debug("Session expired, performing fresh login");
-        throw new Error();
+        logger.info("Session expired, performing fresh login");
       }
     } catch (error) {
-      logger.debug("Corrupted storage state, performing fresh login");
+      logger.info("Corrupted storage state, performing fresh login");
     }
   } else {
-    logger.debug("No storage state file found, performing fresh login");
+    logger.info("No storage state file found, performing fresh login");
   }
 
   const loginPage = new LoginPage(page);
   await loginPage.moveToLoginPage();
-  await loginPage.doLogin("Admin", "admin123");
+  console.log(`Username: ${process.env.testUser}`);
+  console.log(`Password: ${process.env.password}`);
+  await loginPage.doLogin(process.env.testUser, process.env.password);
 
-  logger.info("Saving new Auth state");
+  logger.debug("Saving new Auth state");
 
   await page.context().storageState({ path: STORAGE_STATE });
   logger.debug("Auth state saved successfully");

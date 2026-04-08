@@ -25,7 +25,10 @@ export class LoginPage extends BasePage {
     this.navigateTo(OrangeHrmEndpoint.LOGIN_PAGE);
   }
 
-  async doLogin(username: string, password: string): Promise<DashboardPage> {
+  async doLogin(
+    username: string = "",
+    password: string = "",
+  ): Promise<DashboardPage> {
     this.logger.info(`Initiating login flow with username:${username}`);
     await this.writeTo(this.userNameInputFieldLocator, username);
     await this.writeTo(this.passwordInputFieldLocator, password);
