@@ -30,7 +30,8 @@ export default defineConfig({
   timeout: config.timeout.test,
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    trace: "on-first-retry",
+    trace: config.trace,
+    screenshot: config.screenshot,
   },
 
   /* Configure projects for major browsers */

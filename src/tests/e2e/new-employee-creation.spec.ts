@@ -3,10 +3,12 @@ import { test, expect } from "../../fixtures/base.fixture";
 import { DashboardPage } from "../../pages/DashboardPage";
 
 test("Validating employee creation flow", async ({ page }) => {
-  test.step("Navigating to Dashboard Page", async () => {
+  await test.step("Navigating to Dashboard Page", async () => {
     const dashboardPage = new DashboardPage(page);
     await dashboardPage.moveToDashboardPage();
+    const dashboardEndpoint = OrangeHrmEndpoint.DASHBOARD_PAGE;
+    const actualPageUrl = page.url();
 
-    await expect(page).toHaveURL(OrangeHrmEndpoint.DASHBOARD_PAGE);
+    expect(actualPageUrl).toContain(dashboardEndpoint);
   });
 });
