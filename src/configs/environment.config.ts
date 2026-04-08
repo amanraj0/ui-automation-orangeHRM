@@ -29,8 +29,8 @@ const environments: Record<string, EnvironmentConfig> = {
     retries: 0,
     workers: 1,
     fullyParallel: false,
-    screenshot: "off",
-    trace: "off",
+    screenshot: "on",
+    trace: "on",
   },
 };
 

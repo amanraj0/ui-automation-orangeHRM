@@ -49,8 +49,7 @@ setup("authenticate", async ({ page }) => {
 
   const loginPage = new LoginPage(page);
   await loginPage.moveToLoginPage();
-  console.log(`Username: ${process.env.testUser}`);
-  console.log(`Password: ${process.env.password}`);
+
   await loginPage.doLogin(process.env.testUser, process.env.password);
 
   logger.debug("Saving new Auth state");

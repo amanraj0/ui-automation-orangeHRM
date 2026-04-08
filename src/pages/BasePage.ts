@@ -189,4 +189,11 @@ export class BasePage {
       throw error;
     }
   }
+
+  async getText(locator: Locator, timeout?: number): Promise<string | null> {
+    this.logger.debug(`Fetching text from location: ${locator.toString()}`);
+    await this.waitForElementVisibility(locator);
+
+    return await locator.textContent();
+  }
 }

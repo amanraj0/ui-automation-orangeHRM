@@ -3,4 +3,5 @@ export const enum OrangeHrmEndpoint {
   DASHBOARD_PAGE = "dashboard/index",
   PIM_PAGE = "pim/viewEmployeeList",
   ADD_EMPLOYEE_PAGE = "pim/addEmployee",
+  EMPLOYEE_DETAILS_PAGE = "pim/viewPersonalDetails/empNumber",
 }
