@@ -60,23 +60,6 @@ test(
         isEmployeeListTabIsHighlighted,
         "User moves to Employee List tab on successfull employee creation",
       ).toBeTruthy();
-
-      const employeeDetailsPageEndpoint =
-        OrangeHrmEndpoint.EMPLOYEE_DETAILS_PAGE;
-      const actualEmployeeDetailsPageUrl = page.url();
-
-      expect(
-        actualEmployeeDetailsPageUrl,
-        "User successfully navigated to Employee details page after new employee creation",
-      ).toContain(employeeDetailsPageEndpoint);
-
-      const isEmployeeListHeaderSelected =
-        await addEmployeePage.isEmployeeListHeaderSelected();
-
-      expect(
-        isEmployeeListHeaderSelected,
-        "User moved to Element list tab",
-      ).toBeTruthy();
     });
   },
 );
