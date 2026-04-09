@@ -7,6 +7,8 @@ export class AddNewEmployeePage extends BasePage {
   private readonly employeeLastNameInputLocator: Locator;
   private readonly employeeIdInputLocator: Locator;
   private readonly newEmployeeSaveButtonLocator: Locator;
+  private readonly employeeListNavHeaderLocator: Locator;
+  private readonly loadingSpinnerLocator: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -20,9 +22,15 @@ export class AddNewEmployeePage extends BasePage {
     this.employeeIdInputLocator = page.locator(
       "//div[label[normalize-space()='Employee Id']]/following-sibling::div/input",
     );
-    this.newEmployeeSaveButtonLocator = page.locator(
-      "//button[normalize-space()='Save']",
+    this.newEmployeeSaveButtonLocator = page.getByRole("button", {
+      name: "Save",
+    });
+
+    this.employeeListNavHeaderLocator = page.locator(
+      "//li[a[normalize-space()='Employee List']]",
     );
+
+    this.loadingSpinnerLocator = page.locator(".oxd-loading-spinner");
   }
 
   async createNewEmployee(employeeDetails: {
@@ -45,18 +53,32 @@ export class AddNewEmployeePage extends BasePage {
 
     await this.clickOn(this.newEmployeeSaveButtonLocator);
 
-    this.waitForPageToLoad(OrangeHrmEndpoint.EMPLOYEE_DETAILS_PAGE);
+    await this.waitForPageToLoad(OrangeHrmEndpoint.EMPLOYEE_DETAILS_PAGE);
   }
 
   async fetchEmployeeFirstname(): Promise<string | null> {
+    this.logger.info(`Fetching Employee First Name on Employee List Page}`);
     return await this.getText(this.employeeFirstNameInputLocator);
   }
 
   async fetchEmployeeLastname(): Promise<string | null> {
+    this.logger.info(`Fetching Employee Last Name on Employee List Page}`);
     return await this.getText(this.employeeLastNameInputLocator);
   }
 
   async fetchEmployeeId(): Promise<string | null> {
+    this.logger.info(`Fetching Employee ID on Employee List Page}`);
     return await this.getText(this.employeeIdInputLocator);
+  }
+
+  async isEmployeeListHeaderSelected(): Promise<boolean> {
+    this.waitForElementVisibility(this.employeeListNavHeaderLocator);
+    const className =
+      await this.employeeListNavHeaderLocator.getAttribute("class");
+    return className?.includes("--visited") ?? false;
+  }
+
+  async waitForLoaderToDisappear(): Promise<void> {
+    await this.waitForElementToDisappear(this.loadingSpinnerLocator);
   }
 }

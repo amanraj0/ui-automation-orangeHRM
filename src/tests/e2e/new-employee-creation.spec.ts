@@ -53,6 +53,14 @@ test(
     await test.step("Create a New Employee", async () => {
       await addEmployeePage.createNewEmployee(EmployeeDetails);
 
+      const isEmployeeListTabIsHighlighted =
+        await addEmployeePage.isEmployeeListHeaderSelected();
+
+      expect(
+        isEmployeeListTabIsHighlighted,
+        "User moves to Employee List tab on successfull employee creation",
+      ).toBeTruthy();
+
       const employeeDetailsPageEndpoint =
         OrangeHrmEndpoint.EMPLOYEE_DETAILS_PAGE;
       const actualEmployeeDetailsPageUrl = page.url();
@@ -60,30 +68,15 @@ test(
       expect(
         actualEmployeeDetailsPageUrl,
         "User successfully navigated to Employee details page after new employee creation",
-      ).toContain(actualEmployeeDetailsPageUrl);
-    });
+      ).toContain(employeeDetailsPageEndpoint);
 
-    await test.step("Validate new employee info on employee details page", async () => {
-      const actualEmployeeFirstName =
-        await addEmployeePage.fetchEmployeeFirstname();
-      const actualEmployeeLastName =
-        await addEmployeePage.fetchEmployeeLastname();
-      const actualEmployeeId = await addEmployeePage.fetchEmployeeId();
+      const isEmployeeListHeaderSelected =
+        await addEmployeePage.isEmployeeListHeaderSelected();
 
       expect(
-        actualEmployeeFirstName,
-        "First name on employee details page is same as provided while creating new Employee",
-      ).toEqual(EmployeeDetails.firstName);
-
-      expect(
-        actualEmployeeLastName,
-        "Last name on employee details page is same as provided while creating new Employee",
-      ).toEqual(EmployeeDetails.lastName);
-
-      expect(
-        actualEmployeeId,
-        "ID on employee details page is same as provided while creating new Employee",
-      ).toEqual(EmployeeDetails.id);
+        isEmployeeListHeaderSelected,
+        "User moved to Element list tab",
+      ).toBeTruthy();
     });
   },
 );

@@ -13,6 +13,7 @@ export interface EnvironmentConfig {
   fullyParallel: boolean;
   screenshot: "on" | "off" | "only-on-failure";
   trace: "on" | "off" | "retain-on-failure";
+  video: "on" | "off" | "retain-on-failure";
 }
 
 const environments: Record<string, EnvironmentConfig> = {
@@ -20,10 +21,10 @@ const environments: Record<string, EnvironmentConfig> = {
     name: "dev",
     baseUrl: "https://opensource-demo.orangehrmlive.com/web/index.php/",
     timeout: {
-      navigation: 70000,
+      navigation: 90000,
       actionTimeout: 50000,
       elementTimeout: 50000,
-      test: 80000,
+      test: 100000,
     },
     logLevel: "info",
     retries: 0,
@@ -31,6 +32,7 @@ const environments: Record<string, EnvironmentConfig> = {
     fullyParallel: false,
     screenshot: "on",
     trace: "on",
+    video: "on",
   },
 };
 

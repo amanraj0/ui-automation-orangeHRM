@@ -193,7 +193,40 @@ export class BasePage {
   async getText(locator: Locator, timeout?: number): Promise<string | null> {
     this.logger.debug(`Fetching text from location: ${locator.toString()}`);
     await this.waitForElementVisibility(locator);
+    const tagName = await locator.evaluate((el) => el.tagName);
+    console.log("Tag Name: ", tagName);
+    if (tagName === "INPUT") {
+      return await locator.inputValue();
+    }
 
     return await locator.textContent();
+  }
+
+  async waitForElementToDisappear(
+    locator: Locator,
+    timeout?: number,
+  ): Promise<void> {
+    const elementTimeout = timeout || this.config.timeout.elementTimeout;
+
+    this.logger.debug(
+      `Waiting for element to disappear: ${locator.toString()} (timeout: ${elementTimeout})`,
+    );
+
+    try {
+      await locator.waitFor({ state: "hidden", timeout: elementTimeout });
+      this.logger.debug(`Element disappeared: ${locator.toString()}`);
+    } catch (error) {
+      const reason = error instanceof Error ? error.message : "Unknown Error";
+
+      this.logger.error("ELEMENT_DISAPPEAR_ERROR", {
+        Locator: locator.toString(),
+        State: "hidden",
+        Timeout: elementTimeout,
+        reason,
+        cause: error,
+      });
+
+      throw error;
+    }
   }
 }
