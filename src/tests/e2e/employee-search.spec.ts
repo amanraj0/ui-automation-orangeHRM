@@ -61,5 +61,31 @@ test(
         "User moves to Employee List tab on successfull employee creation",
       ).toBeTruthy();
     });
+
+    await test.step("Move to PIM Page", async () => {
+      pimPage = await dashboardPage.selectSidebarMenu(MenuItem.PIM, PimPage);
+
+      const pimEndpoint = OrangeHrmEndpoint.PIM_PAGE;
+      const actualPimPageUrl = page.url();
+
+      expect(
+        actualPimPageUrl,
+        "User successfully navigated to PIM page",
+      ).toContain(pimEndpoint);
+    });
+
+    await test.step("Search for the employee", async () => {
+      await pimPage.searchForEmployee(
+        `${EmployeeDetails.firstName} ${EmployeeDetails.lastName}`,
+      );
+
+      const actualEmployeeSearchResult =
+        await pimPage.getEmployeeSearchResultString();
+
+      expect(
+        actualEmployeeSearchResult,
+        "User should be able to search for Employee based on name",
+      ).toContain(`${EmployeeDetails.firstName} ${EmployeeDetails.lastName}`);
+    });
   },
 );

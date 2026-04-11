@@ -3,6 +3,7 @@ import { BasePage } from "./BasePage";
 import { OrangeHrmEndpoint } from "../constants/endpoint.constants";
 import { MenuItem } from "../constants/menuItem.constants";
 import { PimPage } from "./PimPage";
+import { RecruitmentPage } from "./RecruitmentPage";
 
 export class DashboardPage extends BasePage {
   constructor(page: Page) {
@@ -24,14 +25,20 @@ export class DashboardPage extends BasePage {
     return sidebarLocator;
   }
 
-  async selectSidebarMenu(menuName: MenuItem): Promise<PimPage> {
+  async selectSidebarMenu<T extends BasePage>(
+    menuName: MenuItem,
+    PageClass: new (page: Page) => T,
+  ): Promise<T> {
     this.logger.info(`Clicking on Menu:${menuName}`);
     this.clickOn(await this.getSidebarMenuLocator(menuName));
 
     switch (menuName) {
       case MenuItem.PIM:
         await this.waitForPageToLoad(OrangeHrmEndpoint.PIM_PAGE);
-        return new PimPage(this.page);
+        return new PageClass(this.page);
+      case MenuItem.RECRUITMENT:
+        await this.waitForPageToLoad(OrangeHrmEndpoint.RECRUITMENT_PAGE);
+        return new PageClass(this.page);
       default:
         this.logger.error(`Unsupported Menu item: ${menuName}`);
         throw new Error(`Unsupported Menu item: ${menuName}`);

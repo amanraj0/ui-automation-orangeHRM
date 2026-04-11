@@ -16,7 +16,7 @@ export default defineConfig({
   testDir: "./src/tests/",
 
   /* Run tests in files in parallel */
-  fullyParallel: true,
+  fullyParallel: config.fullyParallel,
 
   /* Retry on CI only */
   retries: config.retries,

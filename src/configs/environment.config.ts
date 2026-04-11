@@ -28,7 +28,7 @@ const environments: Record<string, EnvironmentConfig> = {
     },
     logLevel: "info",
     retries: 0,
-    workers: 1,
+    workers: 4,
     fullyParallel: false,
     screenshot: "on",
     trace: "on",
