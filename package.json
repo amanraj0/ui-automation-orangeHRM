@@ -4,7 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "smoke-new-employee-creation": "npx playwright test new-employee-creation.spec.ts --grep @smoke --headed"
+    "new-employee-creation-regression-headed": "npx playwright test new-employee-creation.spec.ts --grep @regression --headed",
+    "new-employee-creation-regression": "npx playwright test new-employee-creation.spec.ts --grep @regression",
+    "employee-search-regression-headed": "npx playwright test employee-search.spec.ts --grep @regression --headed",
+    "employee-search-regression": "npx playwright test employee-search.spec.ts --grep @regression",
+    "new-vacancy-creation-regression-headed": "npx playwright test new-vacancy-creation.spec.ts --grep @regression --headed",
+    "new-vacancy-creation-regression": "npx playwright test new-vacancy-creation.spec.ts --grep @regression",
+    "vacancy-search-regression-headed": "npx playwright test vacancy-search.spec.ts --grep @regression --headed",
+    "vacancy-search-regression": "npx playwright test vacancy-search.spec.ts --grep @regression"
   },
   "keywords": [],
   "author": "",
