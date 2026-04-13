@@ -10,3 +10,11 @@ export const VacancyDetails = {
   name: faker.person.jobTitle(),
   jobTitle: "Automaton Tester",
 };
+
+export const CustomerDetails = {
+  name: faker.person.fullName(),
+};
+
+export const ProjectDetails = {
+  name: faker.commerce.productName(),
+};

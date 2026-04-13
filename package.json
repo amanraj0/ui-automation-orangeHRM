@@ -11,7 +11,8 @@
     "new-vacancy-creation-regression-headed": "npx playwright test new-vacancy-creation.spec.ts --grep @regression --headed",
     "new-vacancy-creation-regression": "npx playwright test new-vacancy-creation.spec.ts --grep @regression",
     "vacancy-search-regression-headed": "npx playwright test vacancy-search.spec.ts --grep @regression --headed",
-    "vacancy-search-regression": "npx playwright test vacancy-search.spec.ts --grep @regression"
+    "vacancy-search-regression": "npx playwright test vacancy-search.spec.ts --grep @regression",
+    "new-project-creation-regression-headed": "npx playwright test new-project-creation.spec.ts --grep @regression --headed"
   },
   "keywords": [],
   "author": "",

@@ -39,6 +39,9 @@ export class DashboardPage extends BasePage {
       case MenuItem.RECRUITMENT:
         await this.waitForPageToLoad(OrangeHrmEndpoint.RECRUITMENT_PAGE);
         return new PageClass(this.page);
+      case MenuItem.TIME:
+        await this.waitForPageToLoad(OrangeHrmEndpoint.TIME_PAGE);
+        return new PageClass(this.page);
       default:
         this.logger.error(`Unsupported Menu item: ${menuName}`);
         throw new Error(`Unsupported Menu item: ${menuName}`);

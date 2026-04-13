@@ -7,4 +7,9 @@ export const enum OrangeHrmEndpoint {
   RECRUITMENT_PAGE = "recruitment/viewCandidates",
   VACANCY_PAGE = "recruitment/viewJobVacancy",
   ADD_VACANCY_PAGE = "recruitment/addJobVacancy",
+  TIME_PAGE = "time/viewEmployeeTimesheet",
+  PROJECT_PAGE = "time/viewProjects",
+  CUSTOMER_PAGE = "time/viewCustomers",
+  ADD_PROJECT_PAGE = "time/saveProject",
+  ADD_CUSTOMER_PAGE = "time/addCustomer",
 }
