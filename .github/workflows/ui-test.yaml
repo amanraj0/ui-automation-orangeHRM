@@ -1,0 +1,58 @@
+name: OrangeHRM UI Automation
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment to run test on"
+        required: true
+        default: dev
+        type: choice
+        options:
+          - dev
+          - sit
+          - uat
+
+      test_script:
+        description: "Playwright test script"
+        required: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    env:
+      TEST_ENV: ${{github.event.inputs.environment}}
+      TEST_USER: ${{ secrets.TEST_USER }}
+      TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup NodeJs
+        uses: actions/setup-node@v4
+        with:
+          node-version: 25
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Install Playwright Browser
+        run: npx playwright install --with-deps
+
+      - name: Run Playwright Tests
+        run: ${{ github.event.inputs.test_script }}
+
+      - name: Upload Playwright Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: logs
+          path: logs/
