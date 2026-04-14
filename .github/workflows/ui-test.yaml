@@ -43,6 +43,19 @@ jobs:
       - name: Run Playwright Tests
         run: npm run ${{ github.event.inputs.test_script }}
 
+      - name: Debug storage state
+        if: always()
+        run: |
+          echo "==== STORAGE STATE FILE ===="
+          ls -l playwright/.auth/ || echo "Auth directory not found"
+
+          if [ -f playwright/.auth/user.json ]; then
+            echo "==== FORMATTED JSON ===="
+            cat playwright/.auth/user.json | jq
+          else
+            echo "user.json not found"
+          fi
+
       - name: Upload Playwright Report
         if: always()
         uses: actions/upload-artifact@v4

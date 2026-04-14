@@ -1,3 +1,4 @@
+import logger from "../../configs/winston-logger.config";
 import { OrangeHrmEndpoint } from "../../constants/endpoint.constants";
 import { MenuItem } from "../../constants/menuItem.constants";
 import { test, expect } from "../../fixtures/base.fixture";
@@ -18,6 +19,8 @@ test(
       dashboardPage = new DashboardPage(page);
       await dashboardPage.moveToDashboardPage();
       const dashboardEndpoint = OrangeHrmEndpoint.DASHBOARD_PAGE;
+      const cookies = await page.context().cookies();
+      logger.debug("Cookies after login:", cookies);
       const actualDashboardPageUrl = page.url();
 
       expect(
