@@ -55,5 +55,5 @@ setup("authenticate", async ({ page }) => {
   logger.debug("Saving new Auth state");
 
   await page.context().storageState({ path: STORAGE_STATE });
-  logger.debug("Auth state saved successfully");
+  logger.debug(`Auth state saved successfully at ${STORAGE_STATE}`);
 });

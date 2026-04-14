@@ -161,7 +161,7 @@ export class BasePage {
   async waitForPageToLoad(endpoint: string, timeout?: number): Promise<void> {
     const navigationTimeout = timeout || this.config.timeout.navigation;
     this.logger.debug(
-      `waiting for page to load , endpoint:${endpoint}, (timeout: navigationTimeout)`,
+      `waiting for page to load , endpoint:${endpoint}, (timeout: ${navigationTimeout})`,
     );
 
     try {
