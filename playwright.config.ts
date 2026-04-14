@@ -6,12 +6,7 @@ import logger from "./src/configs/winston-logger.config";
 
 dotenv.config({ path: path.resolve(__dirname, ".env") });
 
-export const STORAGE_STATE = path.join(
-  __dirname,
-  "./playwright/.auth/user.json",
-);
-
-logger.debug(`Storage state path in config file:${STORAGE_STATE}`);
+export const STORAGE_STATE = "playwright/.auth/user.json";
 
 const config = getEnvironmentConfig();
 

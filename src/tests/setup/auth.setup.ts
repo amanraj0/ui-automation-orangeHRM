@@ -6,10 +6,7 @@ import { DashboardPage } from "../../pages/DashboardPage";
 import { OrangeHrmEndpoint } from "../../constants/endpoint.constants";
 import { LoginPage } from "../../pages/LoginPage";
 
-const STORAGE_STATE = path.join(
-  __dirname,
-  "../../../playwright/.auth/user.json",
-);
+export const STORAGE_STATE = "playwright/.auth/user.json";
 
 const authDir = path.dirname(STORAGE_STATE);
 
