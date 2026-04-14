@@ -44,5 +44,8 @@ export function getEnvironmentConfig(): EnvironmentConfig {
       `Provided test_env: "${env}" is not valid, allowed values are "${Object.keys(environments).join(" , ")}"`,
     );
   }
+  if (process.env.CI || process.env.GITHUB_ACTIONS) {
+    config.logLevel = "debug";
+  }
   return config;
 }
