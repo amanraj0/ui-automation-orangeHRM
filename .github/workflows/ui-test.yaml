@@ -41,7 +41,7 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run Playwright Tests
-        run: ${{ github.event.inputs.test_script }}
+        run: npm run ${{ github.event.inputs.test_script }}
 
       - name: Upload Playwright Report
         if: always()
